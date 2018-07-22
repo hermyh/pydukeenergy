@@ -159,7 +159,7 @@ class DukeEnergy(object):
             soup = BeautifulSoup(response.text, "html.parser")
             meter_data = json.loads(soup.find("duke-dropdown", {"id": "usageAnalysisMeter"})["items"])
             _LOGGER.debug(str(meter_data))
-            for meter in meter_data:
+            for meter in meter_data[:1]:
                 meter_type, meter_id = meter["text"].split(" - ")
                 meter_start_date = meter["CalendarStartDate"]
                 self.meters.append(Meter(self, meter_type, meter_id, meter_start_date, self.update_interval))
